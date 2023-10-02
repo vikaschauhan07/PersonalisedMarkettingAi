@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+	<changeSet id="create-customer-table" author="yourname">
+		<createTable tableName="project">
+			<column name="project_id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="project_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="customer">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="customer_id" type="VARCHAR(255)" />
+			<column name="name" type="VARCHAR(255)" />
+			<column name="gender" type="VARCHAR(10)" />
+			<column name="email" type="VARCHAR(255)" />
+			<column name="phone_number" type="VARCHAR(20)" />
+			<column name="address" type="VARCHAR(255)" />
+			<column name="response" type="TEXT" />
+
+			<!-- Add foreign key column -->
+			<column name="project_id" type="BIGINT">
+				<constraints nullable="false" />
+				<fkConstraint baseColumnNames="project_id"
+					baseTableName="customer" referencedColumnNames="id"
+					referencedTableName="project" />
+			</column>
+		</createTable>
+
+		<createTable tableName="marketing_strategy">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="customer_response" type="TEXT" />
+			<column name="chatgpt_response" type="TEXT" />
+			<column name="marketing_strategy" type="TEXT" />
+
+			<!-- Add any other columns if needed -->
+
+		</createTable>
+		<createTable tableName="optimization_data">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="latest_data" type="TEXT" />
+			<column name="latest_trends" type="TEXT" />
+			<column name="latest_news" type="TEXT" />
+			<column name="chatgpt_response" type="TEXT" />
+			<column name="optimized_strategy" type="TEXT" />
+
+			<!-- Add any other columns if needed -->
+
+		</createTable>
+		<createTable tableName="responses">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="project_id" type="BIGINT">
+				<constraints foreignKeyName="fk_project_id"
+					references="projects(id)" onDelete="CASCADE" onUpdate="CASCADE" />
+			</column>
+			<column name="response_text" type="TEXT" />
+			<!-- Add any other columns if needed -->
+
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>
