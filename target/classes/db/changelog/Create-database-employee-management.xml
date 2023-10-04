@@ -26,7 +26,14 @@
 			<column name="phone_number" type="VARCHAR(20)" />
 			<column name="address" type="VARCHAR(255)" />
 			<column name="response" type="TEXT" />
-			<column name="project_id" type="BIGINT" />
+
+			<!-- Add foreign key column -->
+			<column name="project_id" type="BIGINT">
+				<constraints nullable="false" />
+				<fkConstraint baseColumnNames="project_id"
+					baseTableName="customer" referencedColumnNames="id"
+					referencedTableName="project" />
+			</column>
 		</createTable>
 
 		<createTable tableName="marketing_strategy">
@@ -36,6 +43,8 @@
 			<column name="customer_response" type="TEXT" />
 			<column name="chatgpt_response" type="TEXT" />
 			<column name="marketing_strategy" type="TEXT" />
+
+			<!-- Add any other columns if needed -->
 
 		</createTable>
 		<createTable tableName="optimization_data">
@@ -47,16 +56,22 @@
 			<column name="latest_news" type="TEXT" />
 			<column name="chatgpt_response" type="TEXT" />
 			<column name="optimized_strategy" type="TEXT" />
+
+			<!-- Add any other columns if needed -->
+
 		</createTable>
 		<createTable tableName="responses">
 			<column name="id" type="BIGINT" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="project_id" type="BIGINT" />
+			<column name="project_id" type="BIGINT">
+				<constraints foreignKeyName="fk_project_id"
+					references="projects(id)" onDelete="CASCADE" onUpdate="CASCADE" />
+			</column>
 			<column name="response_text" type="TEXT" />
+			<!-- Add any other columns if needed -->
+
 		</createTable>
-		<addForeignKeyConstraint baseTableName="customer" baseColumnNames="project_id" constraintName="project_id" referencedTableName="project" referencedColumnNames="project_id"/>
-		<addForeignKeyConstraint baseTableName="responses" baseColumnNames="project_id" constraintName="project_id" referencedTableName="project" referencedColumnNames="project_id"/>
 	</changeSet>
 
 </databaseChangeLog>
