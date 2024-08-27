@@ -2,7 +2,7 @@
 
 
 
-Steps to run this project:-
+Steps to run this project:-   
 1. settup the code
 2. make a database on PostgreSql named "personalisedmarketingai"
 3. Data Tables will be genrated through the liquibase changelogs
